@@ -108,7 +108,8 @@ public class SecurityConfig   {
                 ),
                 UsernamePasswordAuthenticationFilter.class
         );
-          http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+       http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 
