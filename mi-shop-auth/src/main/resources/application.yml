@@ -1,0 +1,59 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: mi-shop-auth
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id:  Ov23liwGUV1nFiRAeLM6
+            client-secret: 30bfae983fca20d8afdd0c3ba5292fcaf284708d
+#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            client-name: GitHub
+            authorization-grant-type: authorization_code
+          wx:
+            client-id: Ov23liwGUV1nFiRAeLM6
+            client-secret: 30bfae983fca20d8afdd0c3ba5292fcaf284708d
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: wx
+          git_ee:
+            client-id: 0124d7e94990457235559aa9e2e10f82539a79661a8ad3858a06ed819d796328
+            client-secret: efb181220f6bb76014d5208e90dc14010973ceec4c4ba6b5227578d56c2d894d
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            client-name: git_ee
+            authorization-grant-type: authorization_code
+
+        provider:
+          wx:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+            user-name-attribute: openid
+          git_ee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+            user-name-attribute: id
+
+# 前端配置
+frontend:
+  url: http://localhost:5173
+  auth-callback-path: /auth-callback
+  login-path: /login
+  bind-mobile-path: /bind-mobile

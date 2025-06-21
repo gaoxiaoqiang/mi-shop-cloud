@@ -1,0 +1,11 @@
+spring:
+  config:
+    import: nacos:mi-shop-gateway.yaml
+
+  cloud:
+    nacos:
+      config:
+        group: mi-shop-gateway
+        namespace: ed278c7d-d38f-424a-9414-8bca6a53c028
+      discovery:
+        namespace: ed278c7d-d38f-424a-9414-8bca6a53c028

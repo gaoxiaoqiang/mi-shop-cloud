@@ -1,0 +1,11 @@
+spring:
+  config:
+    import: nacos:mi-shop-user-prod.yaml
+
+  cloud:
+    nacos:
+      config:
+        group: mi-shop-user
+        namespace: a9a56312-cfe5-4042-9715-88baa97ea35a
+      discovery:
+        namespace: a9a56312-cfe5-4042-9715-88baa97ea35a

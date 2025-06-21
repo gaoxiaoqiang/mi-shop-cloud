@@ -1,0 +1,59 @@
+
+#server:
+#  port: 8080
+#spring:
+#  application:
+#    name: mi-shop-gateway
+#  profiles:
+#    active: dev
+#
+#  cloud:
+#    nacos:
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+
+
+
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+          enabled: true
+          routes:
+            - id: product-service
+              uri: lb://mi-shop-product
+              predicates:
+                  - Path=/product-api/**
+              filters:
+                  - StripPrefix=1
+            - id: order-service
+              uri: lb://mi-shop-order
+              predicates:
+                - Path=/order-api/**
+              filters:
+                - StripPrefix=1
+            - id: user-service
+              order: 1
+              uri: lb://mi-shop-user
+              predicates:
+                - Path=/user-api/**
+              filters:
+                - StripPrefix=1
+                # 非常重要：添加 TokenRelay 过滤器，将收到的 Bearer Token 传递给下游资源服务
+                - TokenRelay=
+            - id: mis-shop-auth
+              uri: lb://mi-shop-auth # 使用服务发现名称和负载均衡 (lb://)
+              predicates:
+                - Path=/auth/** # 匹配以 /auth开头的请求
+              filters:
+                - StripPrefix=1
+
+
+

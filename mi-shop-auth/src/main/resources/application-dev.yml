@@ -1,0 +1,19 @@
+spring:
+  config:
+    import: nacos:mi-shop-auth.yaml
+
+  cloud:
+    nacos:
+      config:
+        group: DEFAULT_GROUP
+        namespace: ed278c7d-d38f-424a-9414-8bca6a53c028
+      discovery:
+        namespace: ed278c7d-d38f-424a-9414-8bca6a53c028
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
